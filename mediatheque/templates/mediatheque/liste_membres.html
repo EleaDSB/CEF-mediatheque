@@ -1,0 +1,54 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Liste des Membres - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Liste des Membres</h2>
+
+    <div style="margin-bottom: 1rem;">
+        <a href="{% url 'ajouter_membre' %}" class="btn btn-primary">Ajouter un membre</a>
+        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Retour</a>
+    </div>
+
+    {% if membres %}
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Nom</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Prénom</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Email</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Emprunts en cours</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Statut</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for membre in membres %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ membre.nom }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ membre.prenom }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ membre.email }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ membre.nombre_emprunts_en_cours }}/3</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if membre.a_emprunt_en_retard %}
+                        <span style="color: red;">En retard</span>
+                    {% elif membre.peut_emprunter %}
+                        <span style="color: green;">OK</span>
+                    {% else %}
+                        <span style="color: orange;">Limite atteinte</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    <a href="{% url 'modifier_membre' membre.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
+                    <a href="{% url 'supprimer_membre' membre.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun membre enregistré.</p>
+    {% endif %}
+</div>
+{% endblock %}

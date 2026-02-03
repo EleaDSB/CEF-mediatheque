@@ -1,0 +1,27 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Confirmer le retour - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px; text-align: center;">
+    <h2>Confirmer le retour</h2>
+
+    <p style="margin: 2rem 0;">
+        Confirmer le retour de <strong>{{ emprunt.get_media }}</strong> emprunté par <strong>{{ emprunt.membre }}</strong> ?
+    </p>
+
+    <p>
+        Date d'emprunt : {{ emprunt.date_emprunt }}<br>
+        Date de retour prévue : {{ emprunt.date_retour_prevue }}
+        {% if emprunt.est_en_retard %}
+        <br><span style="color: red; font-weight: bold;">ATTENTION : Cet emprunt est en retard !</span>
+        {% endif %}
+    </p>
+
+    <form method="post" style="margin-top: 1.5rem;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Confirmer le retour</button>
+        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}
