@@ -1,0 +1,14 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Espace Membre - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Espace Membre</h2>
+    <p>Bienvenue {{ user.username }} !</p>
+
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'liste_medias' %}" class="btn btn-primary">Consulter les médias</a>
+    </div>
+</div>
+{% endblock %}
