@@ -1,0 +1,71 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Créer un Emprunt - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px;">
+    <h2>Créer un Emprunt</h2>
+
+    <form method="post" style="margin-top: 1rem;">
+        {% csrf_token %}
+
+        <div style="margin-bottom: 1rem;">
+            <label for="id_membre" style="display: block; margin-bottom: 0.5rem;">Membre :</label>
+            {{ form.membre }}
+            {% if form.membre.errors %}
+            <p style="color: red; font-size: 0.9rem;">{{ form.membre.errors.0 }}</p>
+            {% endif %}
+        </div>
+
+        <div style="margin-bottom: 1rem;">
+            <label for="id_type_media" style="display: block; margin-bottom: 0.5rem;">Type de média :</label>
+            {{ form.type_media }}
+        </div>
+
+        <div style="margin-bottom: 1rem;" id="div_livre">
+            <label for="id_livre" style="display: block; margin-bottom: 0.5rem;">Livre :</label>
+            {{ form.livre }}
+        </div>
+
+        <div style="margin-bottom: 1rem; display: none;" id="div_dvd">
+            <label for="id_dvd" style="display: block; margin-bottom: 0.5rem;">DVD :</label>
+            {{ form.dvd }}
+        </div>
+
+        <div style="margin-bottom: 1rem; display: none;" id="div_cd">
+            <label for="id_cd" style="display: block; margin-bottom: 0.5rem;">CD :</label>
+            {{ form.cd }}
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+            <button type="submit" class="btn btn-primary">Créer l'emprunt</button>
+            <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('type_media').addEventListener('change', function() {
+    document.getElementById('div_livre').style.display = 'none';
+    document.getElementById('div_dvd').style.display = 'none';
+    document.getElementById('div_cd').style.display = 'none';
+
+    if (this.value === 'livre') {
+        document.getElementById('div_livre').style.display = 'block';
+    } else if (this.value === 'dvd') {
+        document.getElementById('div_dvd').style.display = 'block';
+    } else if (this.value === 'cd') {
+        document.getElementById('div_cd').style.display = 'block';
+    }
+});
+</script>
+
+<style>
+    select.form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+</style>
+{% endblock %}

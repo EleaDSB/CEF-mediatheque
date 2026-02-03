@@ -4,15 +4,15 @@ from .models import Livre, DVD, CD, JeuPlateau, Membre, Emprunt
 
 @admin.register(Livre)
 class LivreAdmin(admin.ModelAdmin):
-    list_display = ('titre', 'auteur', 'isbn', 'disponible')
-    search_fields = ('titre', 'auteur', 'isbn')
+    list_display = ('titre', 'auteur', 'disponible')
+    search_fields = ('titre', 'auteur')
     list_filter = ('disponible',)
 
 
 @admin.register(DVD)
 class DVDAdmin(admin.ModelAdmin):
-    list_display = ('titre', 'realisateur', 'duree', 'disponible')
-    search_fields = ('titre', 'realisateur')
+    list_display = ('titre', 'auteur', 'duree', 'disponible')
+    search_fields = ('titre', 'auteur')
     list_filter = ('disponible',)
 
 

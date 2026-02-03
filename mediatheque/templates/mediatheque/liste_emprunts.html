@@ -1,0 +1,78 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Gestion des Emprunts - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Gestion des Emprunts</h2>
+
+    <div style="margin-bottom: 1rem;">
+        <a href="{% url 'creer_emprunt' %}" class="btn btn-primary">Nouvel emprunt</a>
+        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Retour</a>
+    </div>
+
+    <h3 style="margin-top: 1.5rem;">Emprunts en cours</h3>
+    {% if emprunts_en_cours %}
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Membre</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Média</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Date emprunt</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Date retour prévue</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Statut</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in emprunts_en_cours %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.membre }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.get_media }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.date_emprunt }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.date_retour_prevue }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if emprunt.est_en_retard %}
+                        <span style="color: red; font-weight: bold;">EN RETARD</span>
+                    {% else %}
+                        <span style="color: green;">En cours</span>
+                    {% endif %}
+                </td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    <a href="{% url 'retourner_emprunt' emprunt.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Retourner</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun emprunt en cours.</p>
+    {% endif %}
+
+    <h3 style="margin-top: 1.5rem;">Emprunts terminés</h3>
+    {% if emprunts_termines %}
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Membre</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Média</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Date emprunt</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Date retour</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprunt in emprunts_termines %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.membre }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.get_media }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.date_emprunt }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ emprunt.date_retour_effective }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun emprunt terminé.</p>
+    {% endif %}
+</div>
+{% endblock %}

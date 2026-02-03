@@ -1,0 +1,21 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Ajouter un Média - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center;">
+    <h2>Ajouter un Média</h2>
+    <p style="margin: 1.5rem 0;">Choisissez le type de média à ajouter :</p>
+
+    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="{% url 'ajouter_livre' %}" class="btn btn-primary" style="padding: 1.5rem 2rem;">Livre</a>
+        <a href="{% url 'ajouter_dvd' %}" class="btn btn-primary" style="padding: 1.5rem 2rem;">DVD</a>
+        <a href="{% url 'ajouter_cd' %}" class="btn btn-primary" style="padding: 1.5rem 2rem;">CD</a>
+        <a href="{% url 'ajouter_jeu' %}" class="btn btn-primary" style="padding: 1.5rem 2rem;">Jeu de plateau</a>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Retour</a>
+    </div>
+</div>
+{% endblock %}

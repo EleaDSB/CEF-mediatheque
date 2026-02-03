@@ -7,7 +7,8 @@ from django.utils import timezone
 class Media(models.Model):
     """Classe mère abstraite pour tous les médias empruntables"""
     titre = models.CharField(max_length=200)
-    auteur = models.CharField(max_length=200)
+    auteur = models.CharField(max_length=200, blank=True, default='')
+    nombre_exemplaires = models.PositiveIntegerField(default=1)
     date_ajout = models.DateField(auto_now_add=True)
     disponible = models.BooleanField(default=True)
 
@@ -20,22 +21,43 @@ class Media(models.Model):
 
 class Livre(Media):
     """Livre héritant de Media"""
-    isbn = models.CharField(max_length=13, unique=True)
-    nombre_pages = models.PositiveIntegerField()
 
     class Meta:
         verbose_name = "Livre"
         verbose_name_plural = "Livres"
 
+    def emprunts_en_cours(self):
+        """Retourne le nombre d'emprunts en cours pour ce livre"""
+        return self.emprunt_set.filter(date_retour_effective__isnull=True).count()
+
+    def exemplaires_disponibles(self):
+        """Retourne le nombre d'exemplaires disponibles"""
+        return self.nombre_exemplaires - self.emprunts_en_cours()
+
+    def est_disponible(self):
+        """Vérifie si au moins un exemplaire est disponible"""
+        return self.exemplaires_disponibles() > 0
+
 
 class DVD(Media):
     """DVD héritant de Media"""
     duree = models.PositiveIntegerField(help_text="Durée en minutes")
-    realisateur = models.CharField(max_length=200)
 
     class Meta:
         verbose_name = "DVD"
         verbose_name_plural = "DVDs"
+
+    def emprunts_en_cours(self):
+        """Retourne le nombre d'emprunts en cours pour ce DVD"""
+        return self.emprunt_set.filter(date_retour_effective__isnull=True).count()
+
+    def exemplaires_disponibles(self):
+        """Retourne le nombre d'exemplaires disponibles"""
+        return self.nombre_exemplaires - self.emprunts_en_cours()
+
+    def est_disponible(self):
+        """Vérifie si au moins un exemplaire est disponible"""
+        return self.exemplaires_disponibles() > 0
 
 
 class CD(Media):
@@ -46,6 +68,18 @@ class CD(Media):
     class Meta:
         verbose_name = "CD"
         verbose_name_plural = "CDs"
+
+    def emprunts_en_cours(self):
+        """Retourne le nombre d'emprunts en cours pour ce CD"""
+        return self.emprunt_set.filter(date_retour_effective__isnull=True).count()
+
+    def exemplaires_disponibles(self):
+        """Retourne le nombre d'exemplaires disponibles"""
+        return self.nombre_exemplaires - self.emprunts_en_cours()
+
+    def est_disponible(self):
+        """Vérifie si au moins un exemplaire est disponible"""
+        return self.exemplaires_disponibles() > 0
 
 
 class JeuPlateau(models.Model):

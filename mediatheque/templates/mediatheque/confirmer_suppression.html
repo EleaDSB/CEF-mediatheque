@@ -1,0 +1,19 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Confirmer la suppression - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 500px; text-align: center;">
+    <h2>Confirmer la suppression</h2>
+
+    <p style="margin: 2rem 0;">
+        Êtes-vous sûr de vouloir supprimer le {{ type }} <strong>{{ objet }}</strong> ?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Oui, supprimer</button>
+        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

@@ -13,8 +13,10 @@
             <tr style="background: #f0f0f0;">
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Auteur</th>
-                <th style="padding: 0.5rem; border: 1px solid #ddd;">ISBN</th>
-                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponible</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponibles</th>
+                {% if user.is_staff %}
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -22,8 +24,19 @@
             <tr>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ livre.titre }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ livre.auteur }}</td>
-                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ livre.isbn }}</td>
-                <td style="padding: 0.5rem; border: 1px solid #ddd;">{% if livre.disponible %}Oui{% else %}Non{% endif %}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if livre.est_disponible %}
+                        <span style="color: green;">{{ livre.exemplaires_disponibles }}/{{ livre.nombre_exemplaires }}</span>
+                    {% else %}
+                        <span style="color: red;">0/{{ livre.nombre_exemplaires }}</span>
+                    {% endif %}
+                </td>
+                {% if user.is_staff %}
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    <a href="{% url 'modifier_livre' livre.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
+                    <a href="{% url 'supprimer_livre' livre.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -38,18 +51,33 @@
         <thead>
             <tr style="background: #f0f0f0;">
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
-                <th style="padding: 0.5rem; border: 1px solid #ddd;">Réalisateur</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Auteur</th>
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Durée</th>
-                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponible</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponibles</th>
+                {% if user.is_staff %}
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
             {% for dvd in dvds %}
             <tr>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.titre }}</td>
-                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.realisateur }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.auteur }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.duree }} min</td>
-                <td style="padding: 0.5rem; border: 1px solid #ddd;">{% if dvd.disponible %}Oui{% else %}Non{% endif %}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if dvd.est_disponible %}
+                        <span style="color: green;">{{ dvd.exemplaires_disponibles }}/{{ dvd.nombre_exemplaires }}</span>
+                    {% else %}
+                        <span style="color: red;">0/{{ dvd.nombre_exemplaires }}</span>
+                    {% endif %}
+                </td>
+                {% if user.is_staff %}
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    <a href="{% url 'modifier_dvd' dvd.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
+                    <a href="{% url 'supprimer_dvd' dvd.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -66,7 +94,10 @@
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Artiste</th>
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Pistes</th>
-                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponible</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponibles</th>
+                {% if user.is_staff %}
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -75,7 +106,19 @@
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ cd.titre }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ cd.artiste }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ cd.nombre_pistes }}</td>
-                <td style="padding: 0.5rem; border: 1px solid #ddd;">{% if cd.disponible %}Oui{% else %}Non{% endif %}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if cd.est_disponible %}
+                        <span style="color: green;">{{ cd.exemplaires_disponibles }}/{{ cd.nombre_exemplaires }}</span>
+                    {% else %}
+                        <span style="color: red;">0/{{ cd.nombre_exemplaires }}</span>
+                    {% endif %}
+                </td>
+                {% if user.is_staff %}
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    <a href="{% url 'modifier_cd' cd.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
+                    <a href="{% url 'supprimer_cd' cd.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -92,6 +135,9 @@
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Éditeur</th>
                 <th style="padding: 0.5rem; border: 1px solid #ddd;">Joueurs</th>
+                {% if user.is_staff %}
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -100,6 +146,12 @@
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ jeu.titre }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ jeu.editeur }}</td>
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ jeu.nombre_joueurs_min }}-{{ jeu.nombre_joueurs_max }}</td>
+                {% if user.is_staff %}
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    <a href="{% url 'modifier_jeu' jeu.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
+                    <a href="{% url 'supprimer_jeu' jeu.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
+                </td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -109,7 +161,7 @@
     {% endif %}
 
     <div style="margin-top: 2rem;">
-        <a href="javascript:history.back()" class="btn btn-secondary">Retour</a>
+        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Retour</a>
     </div>
 </div>
 {% endblock %}
