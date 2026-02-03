@@ -1,0 +1,115 @@
+{% extends 'mediatheque/base.html' %}
+
+{% block title %}Liste des Médias - Médiathèque{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Liste des Médias</h2>
+
+    <h3 style="margin-top: 1.5rem;">Livres</h3>
+    {% if livres %}
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Auteur</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">ISBN</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for livre in livres %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ livre.titre }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ livre.auteur }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ livre.isbn }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{% if livre.disponible %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun livre disponible.</p>
+    {% endif %}
+
+    <h3 style="margin-top: 1.5rem;">DVDs</h3>
+    {% if dvds %}
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Réalisateur</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Durée</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for dvd in dvds %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.titre }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.realisateur }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ dvd.duree }} min</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{% if dvd.disponible %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun DVD disponible.</p>
+    {% endif %}
+
+    <h3 style="margin-top: 1.5rem;">CDs</h3>
+    {% if cds %}
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Artiste</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Pistes</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Disponible</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cd in cds %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ cd.titre }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ cd.artiste }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ cd.nombre_pistes }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{% if cd.disponible %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun CD disponible.</p>
+    {% endif %}
+
+    <h3 style="margin-top: 1.5rem;">Jeux de Plateau (consultation uniquement)</h3>
+    {% if jeux %}
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 1rem;">
+        <thead>
+            <tr style="background: #f0f0f0;">
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Titre</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Éditeur</th>
+                <th style="padding: 0.5rem; border: 1px solid #ddd;">Joueurs</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jeu in jeux %}
+            <tr>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ jeu.titre }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ jeu.editeur }}</td>
+                <td style="padding: 0.5rem; border: 1px solid #ddd;">{{ jeu.nombre_joueurs_min }}-{{ jeu.nombre_joueurs_max }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun jeu de plateau disponible.</p>
+    {% endif %}
+
+    <div style="margin-top: 2rem;">
+        <a href="javascript:history.back()" class="btn btn-secondary">Retour</a>
+    </div>
+</div>
+{% endblock %}
