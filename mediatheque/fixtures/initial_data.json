@@ -1,0 +1,297 @@
+[
+    {
+        "model": "mediatheque.membre",
+        "pk": 1,
+        "fields": {
+            "nom": "Dupont",
+            "prenom": "Marie",
+            "email": "marie.dupont@email.com",
+            "date_inscription": "2024-01-15",
+            "actif": true
+        }
+    },
+    {
+        "model": "mediatheque.membre",
+        "pk": 2,
+        "fields": {
+            "nom": "Martin",
+            "prenom": "Jean",
+            "email": "jean.martin@email.com",
+            "date_inscription": "2024-02-20",
+            "actif": true
+        }
+    },
+    {
+        "model": "mediatheque.membre",
+        "pk": 3,
+        "fields": {
+            "nom": "Bernard",
+            "prenom": "Sophie",
+            "email": "sophie.bernard@email.com",
+            "date_inscription": "2024-03-10",
+            "actif": true
+        }
+    },
+    {
+        "model": "mediatheque.membre",
+        "pk": 4,
+        "fields": {
+            "nom": "Petit",
+            "prenom": "Lucas",
+            "email": "lucas.petit@email.com",
+            "date_inscription": "2024-04-05",
+            "actif": false
+        }
+    },
+    {
+        "model": "mediatheque.livre",
+        "pk": 1,
+        "fields": {
+            "titre": "Le Petit Prince",
+            "auteur": "Antoine de Saint-Exupery",
+            "nombre_exemplaires": 3,
+            "date_ajout": "2024-01-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.livre",
+        "pk": 2,
+        "fields": {
+            "titre": "1984",
+            "auteur": "George Orwell",
+            "nombre_exemplaires": 2,
+            "date_ajout": "2024-01-05",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.livre",
+        "pk": 3,
+        "fields": {
+            "titre": "Les Miserables",
+            "auteur": "Victor Hugo",
+            "nombre_exemplaires": 1,
+            "date_ajout": "2024-01-10",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.livre",
+        "pk": 4,
+        "fields": {
+            "titre": "L'Etranger",
+            "auteur": "Albert Camus",
+            "nombre_exemplaires": 2,
+            "date_ajout": "2024-02-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.livre",
+        "pk": 5,
+        "fields": {
+            "titre": "Harry Potter a l'ecole des sorciers",
+            "auteur": "J.K. Rowling",
+            "nombre_exemplaires": 4,
+            "date_ajout": "2024-02-15",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.dvd",
+        "pk": 1,
+        "fields": {
+            "titre": "Inception",
+            "auteur": "Christopher Nolan",
+            "duree": 148,
+            "nombre_exemplaires": 2,
+            "date_ajout": "2024-01-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.dvd",
+        "pk": 2,
+        "fields": {
+            "titre": "Le Seigneur des Anneaux",
+            "auteur": "Peter Jackson",
+            "duree": 178,
+            "nombre_exemplaires": 1,
+            "date_ajout": "2024-01-10",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.dvd",
+        "pk": 3,
+        "fields": {
+            "titre": "Intouchables",
+            "auteur": "Olivier Nakache",
+            "duree": 112,
+            "nombre_exemplaires": 3,
+            "date_ajout": "2024-02-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.dvd",
+        "pk": 4,
+        "fields": {
+            "titre": "Avatar",
+            "auteur": "James Cameron",
+            "duree": 162,
+            "nombre_exemplaires": 2,
+            "date_ajout": "2024-03-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.cd",
+        "pk": 1,
+        "fields": {
+            "titre": "Abbey Road",
+            "auteur": "The Beatles",
+            "artiste": "The Beatles",
+            "nombre_pistes": 17,
+            "nombre_exemplaires": 2,
+            "date_ajout": "2024-01-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.cd",
+        "pk": 2,
+        "fields": {
+            "titre": "Thriller",
+            "auteur": "Michael Jackson",
+            "artiste": "Michael Jackson",
+            "nombre_pistes": 9,
+            "nombre_exemplaires": 1,
+            "date_ajout": "2024-01-15",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.cd",
+        "pk": 3,
+        "fields": {
+            "titre": "Random Access Memories",
+            "auteur": "Daft Punk",
+            "artiste": "Daft Punk",
+            "nombre_pistes": 13,
+            "nombre_exemplaires": 2,
+            "date_ajout": "2024-02-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.cd",
+        "pk": 4,
+        "fields": {
+            "titre": "21",
+            "auteur": "Adele",
+            "artiste": "Adele",
+            "nombre_pistes": 11,
+            "nombre_exemplaires": 1,
+            "date_ajout": "2024-03-01",
+            "disponible": true
+        }
+    },
+    {
+        "model": "mediatheque.jeuplateau",
+        "pk": 1,
+        "fields": {
+            "titre": "Catan",
+            "editeur": "Kosmos",
+            "nombre_joueurs_min": 3,
+            "nombre_joueurs_max": 4,
+            "date_ajout": "2024-01-01"
+        }
+    },
+    {
+        "model": "mediatheque.jeuplateau",
+        "pk": 2,
+        "fields": {
+            "titre": "Carcassonne",
+            "editeur": "Hans im Gluck",
+            "nombre_joueurs_min": 2,
+            "nombre_joueurs_max": 5,
+            "date_ajout": "2024-01-15"
+        }
+    },
+    {
+        "model": "mediatheque.jeuplateau",
+        "pk": 3,
+        "fields": {
+            "titre": "7 Wonders",
+            "editeur": "Repos Production",
+            "nombre_joueurs_min": 2,
+            "nombre_joueurs_max": 7,
+            "date_ajout": "2024-02-01"
+        }
+    },
+    {
+        "model": "mediatheque.jeuplateau",
+        "pk": 4,
+        "fields": {
+            "titre": "Monopoly",
+            "editeur": "Hasbro",
+            "nombre_joueurs_min": 2,
+            "nombre_joueurs_max": 8,
+            "date_ajout": "2024-02-15"
+        }
+    },
+    {
+        "model": "mediatheque.emprunt",
+        "pk": 1,
+        "fields": {
+            "membre": 1,
+            "livre": 1,
+            "dvd": null,
+            "cd": null,
+            "date_emprunt": "2024-12-01",
+            "date_retour_prevue": "2024-12-08",
+            "date_retour_effective": "2024-12-07"
+        }
+    },
+    {
+        "model": "mediatheque.emprunt",
+        "pk": 2,
+        "fields": {
+            "membre": 2,
+            "livre": 2,
+            "dvd": null,
+            "cd": null,
+            "date_emprunt": "2025-01-20",
+            "date_retour_prevue": "2025-01-27",
+            "date_retour_effective": null
+        }
+    },
+    {
+        "model": "mediatheque.emprunt",
+        "pk": 3,
+        "fields": {
+            "membre": 1,
+            "livre": null,
+            "dvd": 1,
+            "cd": null,
+            "date_emprunt": "2025-01-25",
+            "date_retour_prevue": "2025-02-01",
+            "date_retour_effective": null
+        }
+    },
+    {
+        "model": "mediatheque.emprunt",
+        "pk": 4,
+        "fields": {
+            "membre": 3,
+            "livre": null,
+            "dvd": null,
+            "cd": 1,
+            "date_emprunt": "2025-01-28",
+            "date_retour_prevue": "2025-02-04",
+            "date_retour_effective": null
+        }
+    }
+]
