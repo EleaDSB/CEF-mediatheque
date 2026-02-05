@@ -33,6 +33,9 @@
                 </td>
                 {% if user.is_staff %}
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if livre.est_disponible %}
+                    <a href="{% url 'creer_emprunt_livre' livre.pk %}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Emprunter</a>
+                    {% endif %}
                     <a href="{% url 'modifier_livre' livre.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
                     <a href="{% url 'supprimer_livre' livre.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
                 </td>
@@ -74,6 +77,9 @@
                 </td>
                 {% if user.is_staff %}
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if dvd.est_disponible %}
+                    <a href="{% url 'creer_emprunt_dvd' dvd.pk %}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Emprunter</a>
+                    {% endif %}
                     <a href="{% url 'modifier_dvd' dvd.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
                     <a href="{% url 'supprimer_dvd' dvd.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
                 </td>
@@ -115,6 +121,9 @@
                 </td>
                 {% if user.is_staff %}
                 <td style="padding: 0.5rem; border: 1px solid #ddd;">
+                    {% if cd.est_disponible %}
+                    <a href="{% url 'creer_emprunt_cd' cd.pk %}" class="btn btn-secondary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Emprunter</a>
+                    {% endif %}
                     <a href="{% url 'modifier_cd' cd.pk %}" class="btn btn-primary" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Modifier</a>
                     <a href="{% url 'supprimer_cd' cd.pk %}" class="btn btn-danger" style="padding: 0.25rem 0.5rem; font-size: 0.9rem;">Supprimer</a>
                 </td>
@@ -161,7 +170,11 @@
     {% endif %}
 
     <div style="margin-top: 2rem;">
-        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Retour</a>
+        {% if user.is_staff %}
+            <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Retour</a>
+        {% else %}
+            <a href="{% url 'home' %}" class="btn btn-secondary">Retour</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -16,7 +16,7 @@
             min-height: 100vh;
         }
         header {
-            background-color: #2c3e50;
+            background-color: #00b4d8;
             color: white;
             padding: 1rem;
             text-align: center;
@@ -64,6 +64,10 @@
             background-color: #2ecc71;
             color: white;
         }
+        .btn-tertiary {
+            background-color: #f8961e;
+            color: white;
+        }
         .btn-danger {
             background-color: #e74c3c;
             color: white;
@@ -98,7 +102,8 @@
 </head>
 <body>
     <header>
-        <h1>Médiathèque "Notre livre, notre média"</h1>
+        <h1>Médiathèque l'Archipel </h1>
+        <h2> "Le monde s'ouvre à vous"</h2>
         <nav>
             <a href="{% url 'home' %}">Accueil</a>
             {% if user.is_authenticated %}
@@ -120,7 +125,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Médiathèque - Tous droits réservés</p>
+        <p>&copy; 2026 Médiathèque - Tous droits réservés</p>
     </footer>
 </body>
 </html>

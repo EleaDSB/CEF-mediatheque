@@ -473,3 +473,99 @@ def retourner_emprunt(request, pk):
         return redirect('liste_emprunts')
 
     return render(request, 'mediatheque/confirmer_retour.html', {'emprunt': emprunt})
+
+
+@login_required
+@user_passes_test(is_bibliothecaire)
+def creer_emprunt_livre(request, pk):
+    """Créer un emprunt pour un livre spécifique"""
+    livre = get_object_or_404(Livre, pk=pk)
+    membres = Membre.objects.filter(actif=True)
+
+    if not livre.est_disponible():
+        messages.error(request, f"Aucun exemplaire de '{livre.titre}' n'est disponible.")
+        return redirect('liste_medias')
+
+    if request.method == 'POST':
+        membre_id = request.POST.get('membre')
+        membre = get_object_or_404(Membre, pk=membre_id)
+
+        if not membre.peut_emprunter():
+            if membre.a_emprunt_en_retard():
+                messages.error(request, f"{membre} a un emprunt en retard.")
+            else:
+                messages.error(request, f"{membre} a déjà 3 emprunts en cours.")
+            return render(request, 'mediatheque/form_emprunt_direct.html', {'media': livre, 'type_media': 'livre', 'membres': membres})
+
+        emprunt = Emprunt(membre=membre, livre=livre)
+        emprunt.save()
+
+        logger.info(f"Emprunt créé: {livre.titre} pour {membre} par {request.user.username}")
+        messages.success(request, f"Emprunt de '{livre.titre}' créé pour {membre}.")
+        return redirect('liste_medias')
+
+    return render(request, 'mediatheque/form_emprunt_direct.html', {'media': livre, 'type_media': 'livre', 'membres': membres})
+
+
+@login_required
+@user_passes_test(is_bibliothecaire)
+def creer_emprunt_dvd(request, pk):
+    """Créer un emprunt pour un DVD spécifique"""
+    dvd = get_object_or_404(DVD, pk=pk)
+    membres = Membre.objects.filter(actif=True)
+
+    if not dvd.est_disponible():
+        messages.error(request, f"Aucun exemplaire de '{dvd.titre}' n'est disponible.")
+        return redirect('liste_medias')
+
+    if request.method == 'POST':
+        membre_id = request.POST.get('membre')
+        membre = get_object_or_404(Membre, pk=membre_id)
+
+        if not membre.peut_emprunter():
+            if membre.a_emprunt_en_retard():
+                messages.error(request, f"{membre} a un emprunt en retard.")
+            else:
+                messages.error(request, f"{membre} a déjà 3 emprunts en cours.")
+            return render(request, 'mediatheque/form_emprunt_direct.html', {'media': dvd, 'type_media': 'dvd', 'membres': membres})
+
+        emprunt = Emprunt(membre=membre, dvd=dvd)
+        emprunt.save()
+
+        logger.info(f"Emprunt créé: {dvd.titre} pour {membre} par {request.user.username}")
+        messages.success(request, f"Emprunt de '{dvd.titre}' créé pour {membre}.")
+        return redirect('liste_medias')
+
+    return render(request, 'mediatheque/form_emprunt_direct.html', {'media': dvd, 'type_media': 'dvd', 'membres': membres})
+
+
+@login_required
+@user_passes_test(is_bibliothecaire)
+def creer_emprunt_cd(request, pk):
+    """Créer un emprunt pour un CD spécifique"""
+    cd = get_object_or_404(CD, pk=pk)
+    membres = Membre.objects.filter(actif=True)
+
+    if not cd.est_disponible():
+        messages.error(request, f"Aucun exemplaire de '{cd.titre}' n'est disponible.")
+        return redirect('liste_medias')
+
+    if request.method == 'POST':
+        membre_id = request.POST.get('membre')
+        membre = get_object_or_404(Membre, pk=membre_id)
+
+        if not membre.peut_emprunter():
+            if membre.a_emprunt_en_retard():
+                messages.error(request, f"{membre} a un emprunt en retard.")
+            else:
+                messages.error(request, f"{membre} a déjà 3 emprunts en cours.")
+            return render(request, 'mediatheque/form_emprunt_direct.html', {'media': cd, 'type_media': 'cd', 'membres': membres})
+
+        emprunt = Emprunt(membre=membre, cd=cd)
+        emprunt.save()
+
+        logger.info(f"Emprunt créé: {cd.titre} pour {membre} par {request.user.username}")
+        messages.success(request, f"Emprunt de '{cd.titre}' créé pour {membre}.")
+        return redirect('liste_medias')
+
+    return render(request, 'mediatheque/form_emprunt_direct.html', {'media': cd, 'type_media': 'cd', 'membres': membres})
