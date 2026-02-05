@@ -37,5 +37,8 @@ urlpatterns = [
     # Emprunts
     path('emprunts/', views.liste_emprunts, name='liste_emprunts'),
     path('emprunts/creer/', views.creer_emprunt, name='creer_emprunt'),
+    path('emprunts/creer/livre/<int:pk>/', views.creer_emprunt_livre, name='creer_emprunt_livre'),
+    path('emprunts/creer/dvd/<int:pk>/', views.creer_emprunt_dvd, name='creer_emprunt_dvd'),
+    path('emprunts/creer/cd/<int:pk>/', views.creer_emprunt_cd, name='creer_emprunt_cd'),
     path('emprunts/retourner/<int:pk>/', views.retourner_emprunt, name='retourner_emprunt'),
 ]

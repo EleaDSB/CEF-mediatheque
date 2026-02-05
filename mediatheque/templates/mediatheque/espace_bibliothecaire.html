@@ -5,14 +5,13 @@
 {% block content %}
 <div class="container">
     <h2>Espace Bibliothécaire</h2>
-    <p>Bienvenue {{ user.username }} !</p>
 
     <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem;">
         <a href="{% url 'liste_medias' %}" class="btn btn-primary">Liste des médias</a>
         <a href="{% url 'ajouter_media' %}" class="btn btn-primary">Ajouter un média</a>
         <a href="{% url 'liste_membres' %}" class="btn btn-secondary">Liste des membres</a>
         <a href="{% url 'ajouter_membre' %}" class="btn btn-secondary">Ajouter un membre</a>
-        <a href="{% url 'liste_emprunts' %}" class="btn btn-primary">Gérer les emprunts</a>
+        <a href="{% url 'liste_emprunts' %}" class="btn btn-tertiary">Gérer les emprunts</a>
     </div>
 </div>
 {% endblock %}
