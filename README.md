@@ -82,10 +82,7 @@ python3 manage.py migrate
 python3 manage.py loaddata initial_data
 ```
 
-### 7. Créer un compte bibliothécaire
-```bash
-python3 manage.py createsuperuser
-```
+Cette commande charge les données de test ainsi que le compte bibliothécaire.
 
 ## Lancement
 
@@ -95,6 +92,12 @@ python3 manage.py runserver
 
 Accéder à l'application : http://127.0.0.1:8000/
 
+## Connexion bibliothécaire
+
+Identifiants par défaut :
+- **Utilisateur** : `bibliothecaire`
+- **Mot de passe** : `mediatheque2026`
+
 ## Tests
 
 Exécuter les tests unitaires :
@@ -102,7 +105,7 @@ Exécuter les tests unitaires :
 python3 manage.py test mediatheque
 ```
 
-45 tests couvrent les modèles, les règles métier et les vues.
+44 tests couvrent les modèles, les règles métier et les vues.
 
 ## Structure du projet
 
@@ -120,7 +123,7 @@ CEF-mediatheque/
 │   ├── views.py            # Vues
 │   ├── forms.py            # Formulaires
 │   ├── urls.py             # Routes
-│   └── tests.py            # Tests unitaires (45 tests)
+│   └── tests.py            # Tests unitaires (44 tests)
 ├── requirements.txt        # Dépendances Python
 ├── .env.example            # Exemple de configuration
 ├── manage.py
@@ -154,7 +157,8 @@ Emprunt (relation entre Membre et Media)
 ## Données de démonstration
 
 Les fixtures contiennent :
-- 4 membres (dont 1 inactif)
+- 1 compte bibliothécaire
+- 3 membres
 - 5 livres
 - 4 DVDs
 - 4 CDs
