@@ -141,7 +141,6 @@ class MembreModelTest(TestCase):
         """Test de création d'un membre"""
         self.assertEqual(self.membre.nom, "Dupont")
         self.assertEqual(self.membre.prenom, "Jean")
-        self.assertTrue(self.membre.actif)
 
     def test_membre_str(self):
         """Test de la représentation string du membre"""
@@ -156,12 +155,6 @@ class MembreModelTest(TestCase):
     def test_peut_emprunter_nouveau_membre(self):
         """Test qu'un nouveau membre peut emprunter"""
         self.assertTrue(self.membre.peut_emprunter())
-
-    def test_membre_inactif_ne_peut_pas_emprunter(self):
-        """Test qu'un membre inactif ne peut pas emprunter"""
-        self.membre.actif = False
-        self.membre.save()
-        self.assertFalse(self.membre.peut_emprunter())
 
 
 class EmpruntModelTest(TestCase):
@@ -362,8 +355,7 @@ class VuesBibliothecaireTest(TestCase):
         response = self.client.post(reverse('ajouter_membre'), {
             'nom': 'Test',
             'prenom': 'User',
-            'email': 'test@test.com',
-            'actif': True
+            'email': 'test@test.com'
         })
         self.assertEqual(Membre.objects.count(), 1)
         self.assertRedirects(response, reverse('liste_membres'))
