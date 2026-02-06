@@ -288,7 +288,7 @@
             "password": "pbkdf2_sha256$1200000$f7iSaVD7a5sxo9gcEHBvkS$HV+RyQEzYdDU4ivxeWHXMJ3bL2buGPBEw86u72oExI0=",
             "is_staff": true,
             "is_active": true,
-            "is_superuser": true,
+            "is_superuser": false,
             "first_name": "",
             "last_name": "",
             "email": "bibliothecaire@mediatheque.fr",
