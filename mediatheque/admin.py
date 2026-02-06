@@ -31,9 +31,8 @@ class JeuPlateauAdmin(admin.ModelAdmin):
 
 @admin.register(Membre)
 class MembreAdmin(admin.ModelAdmin):
-    list_display = ('nom', 'prenom', 'email', 'date_inscription', 'actif')
+    list_display = ('nom', 'prenom', 'email', 'date_inscription')
     search_fields = ('nom', 'prenom', 'email')
-    list_filter = ('actif',)
 
 
 @admin.register(Emprunt)

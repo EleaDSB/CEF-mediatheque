@@ -68,7 +68,7 @@ class JeuPlateauForm(forms.ModelForm):
 class EmpruntForm(forms.Form):
     """Formulaire pour créer un emprunt"""
     membre = forms.ModelChoiceField(
-        queryset=Membre.objects.filter(actif=True),
+        queryset=Membre.objects.all(),
         label="Membre",
         widget=forms.Select(attrs={'class': 'form-input'})
     )

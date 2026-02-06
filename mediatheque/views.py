@@ -53,6 +53,10 @@ def login_membre(request):
 
 def login_bibliothecaire(request):
     """Connexion pour les bibliothécaires"""
+    # Si déjà connecté en tant que bibliothécaire, rediriger vers l'espace
+    if request.user.is_authenticated and request.user.is_staff:
+        return redirect('espace_bibliothecaire')
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -106,7 +110,7 @@ def espace_bibliothecaire(request):
     return render(request, 'mediatheque/espace_bibliothecaire.html')
 
 
-def liste_medias(request):
+def liste_medias(request, acces_membre=False):
     """Liste de tous les médias - accessible à tous"""
     livres = Livre.objects.all()
     dvds = DVD.objects.all()
@@ -121,7 +125,13 @@ def liste_medias(request):
         'dvds': dvds,
         'cds': cds,
         'jeux': jeux,
+        'acces_membre': acces_membre,
     })
+
+
+def liste_medias_membre(request):
+    """Liste des médias en mode lecture seule (accès membre)"""
+    return liste_medias(request, acces_membre=True)
 
 
 # ============== GESTION DES MEMBRES ==============
@@ -480,7 +490,7 @@ def retourner_emprunt(request, pk):
 def creer_emprunt_livre(request, pk):
     """Créer un emprunt pour un livre spécifique"""
     livre = get_object_or_404(Livre, pk=pk)
-    membres = Membre.objects.filter(actif=True)
+    membres = Membre.objects.all()
 
     if not livre.est_disponible():
         messages.error(request, f"Aucun exemplaire de '{livre.titre}' n'est disponible.")
@@ -512,7 +522,7 @@ def creer_emprunt_livre(request, pk):
 def creer_emprunt_dvd(request, pk):
     """Créer un emprunt pour un DVD spécifique"""
     dvd = get_object_or_404(DVD, pk=pk)
-    membres = Membre.objects.filter(actif=True)
+    membres = Membre.objects.all()
 
     if not dvd.est_disponible():
         messages.error(request, f"Aucun exemplaire de '{dvd.titre}' n'est disponible.")
@@ -544,7 +554,7 @@ def creer_emprunt_dvd(request, pk):
 def creer_emprunt_cd(request, pk):
     """Créer un emprunt pour un CD spécifique"""
     cd = get_object_or_404(CD, pk=pk)
-    membres = Membre.objects.filter(actif=True)
+    membres = Membre.objects.all()
 
     if not cd.est_disponible():
         messages.error(request, f"Aucun exemplaire de '{cd.titre}' n'est disponible.")

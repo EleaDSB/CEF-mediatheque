@@ -13,7 +13,11 @@
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Oui, supprimer</button>
-        <a href="{% url 'espace_bibliothecaire' %}" class="btn btn-secondary">Annuler</a>
+        {% if type == 'membre' %}
+            <a href="{% url 'liste_membres' %}" class="btn btn-secondary">Annuler</a>
+        {% else %}
+            <a href="{% url 'liste_medias' %}" class="btn btn-secondary">Annuler</a>
+        {% endif %}
     </form>
 </div>
 {% endblock %}

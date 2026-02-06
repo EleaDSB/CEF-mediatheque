@@ -6,8 +6,7 @@
             "nom": "Dupont",
             "prenom": "Marie",
             "email": "marie.dupont@email.com",
-            "date_inscription": "2024-01-15",
-            "actif": true
+            "date_inscription": "2024-01-15"
         }
     },
     {
@@ -17,8 +16,7 @@
             "nom": "Martin",
             "prenom": "Jean",
             "email": "jean.martin@email.com",
-            "date_inscription": "2024-02-20",
-            "actif": true
+            "date_inscription": "2024-02-20"
         }
     },
     {
@@ -28,19 +26,7 @@
             "nom": "Bernard",
             "prenom": "Sophie",
             "email": "sophie.bernard@email.com",
-            "date_inscription": "2024-03-10",
-            "actif": true
-        }
-    },
-    {
-        "model": "mediatheque.membre",
-        "pk": 4,
-        "fields": {
-            "nom": "Petit",
-            "prenom": "Lucas",
-            "email": "lucas.petit@email.com",
-            "date_inscription": "2024-04-05",
-            "actif": false
+            "date_inscription": "2024-03-10"
         }
     },
     {
@@ -292,6 +278,21 @@
             "date_emprunt": "2025-01-28",
             "date_retour_prevue": "2025-02-04",
             "date_retour_effective": null
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "username": "bibliothecaire",
+            "password": "pbkdf2_sha256$1200000$f7iSaVD7a5sxo9gcEHBvkS$HV+RyQEzYdDU4ivxeWHXMJ3bL2buGPBEw86u72oExI0=",
+            "is_staff": true,
+            "is_active": true,
+            "is_superuser": true,
+            "first_name": "",
+            "last_name": "",
+            "email": "bibliothecaire@mediatheque.fr",
+            "date_joined": "2024-01-01T00:00:00Z"
         }
     }
 ]

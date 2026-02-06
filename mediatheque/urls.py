@@ -12,6 +12,7 @@ urlpatterns = [
 
     # Médias
     path('medias/', views.liste_medias, name='liste_medias'),
+    path('medias/membre/', views.liste_medias_membre, name='liste_medias_membre'),
     path('medias/ajouter/', views.ajouter_media, name='ajouter_media'),
     path('medias/ajouter/livre/', views.ajouter_livre, name='ajouter_livre'),
     path('medias/ajouter/dvd/', views.ajouter_dvd, name='ajouter_dvd'),

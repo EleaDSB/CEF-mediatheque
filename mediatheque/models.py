@@ -105,7 +105,6 @@ class Membre(models.Model):
     prenom = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     date_inscription = models.DateField(auto_now_add=True)
-    actif = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Membre"
@@ -127,8 +126,6 @@ class Membre(models.Model):
 
     def peut_emprunter(self):
         """Vérifie si le membre peut emprunter (max 3 emprunts, pas de retard)"""
-        if not self.actif:
-            return False
         if self.nombre_emprunts_en_cours() >= 3:
             return False
         if self.a_emprunt_en_retard():
